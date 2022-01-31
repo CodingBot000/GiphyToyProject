@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+          <variable
+               name="item"
+               type="com.exam.sample.model.data.TrendingDetail" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/grid_item_corner_radius"
+        app:cardUseCompatPadding="true">
+        <ImageView
+            android:id="@+id/img"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:photo="@{item.images.fixed_width_small.url}"/>
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:typeface="serif"
+            android:textStyle="bold"
+            android:layout_gravity="bottom"
+            app:textEffectTwinkle="@{item.title}"/>
+
+    </androidx.cardview.widget.CardView>
+</layout>

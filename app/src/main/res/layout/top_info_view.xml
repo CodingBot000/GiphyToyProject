@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <import type="com.exam.sample.utils.Const"/>
+        <variable
+            name="viewModel"
+            type="com.exam.sample.viewmodel.DetailViewModel" />
+    </data>
+    <RelativeLayout
+        android:id = "@+id/rl_middle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/margin_padding_10dp"
+        android:paddingRight="@dimen/margin_padding_10dp">
+        <CheckBox
+            android:id="@+id/checkBoxFavorite"
+            android:layout_width="@dimen/checkbox_favorite_size"
+            android:layout_height="@dimen/checkbox_favorite_size"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_padding_10dp"
+            android:layout_toStartOf="@id/btnSend"
+            android:background="@drawable/checkbox"
+            android:button="@null"
+            android:onCheckedChanged="@{(compoundButton, checked) -> viewModel.checkBoxChecked(checked)}" />
+        <ImageButton
+            android:id = "@+id/btnSend"
+            android:layout_width="@dimen/middle_icon_size"
+            android:layout_height="@dimen/middle_icon_size"
+            android:onClick="@{() -> viewModel.btnClickEventSend(Const.BTN_EVENT_SEND)}"
+            android:background = "@drawable/icon_share"
+            android:layout_marginEnd="@dimen/margin_padding_10dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/btnMore"/>
+        <ImageButton
+            android:id = "@+id/btnMore"
+            android:layout_width="@dimen/middle_icon_size"
+            android:layout_height="@dimen/middle_icon_size"
+            android:onClick="@{() -> viewModel.btnClickEventSend(Const.BTN_EVENT_SHARE)}"
+            android:background = "@drawable/icon_more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.exam.sample.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            android:background="@color/colorWhite">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_item_trending_height">
+                <include
+                    layout="@layout/top_item"
+                    android:id="@+id/rl_topItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/top_item_trending_height"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:viewModel="@{viewModel}"/>
+                <View
+                    android:id = "@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/colorGrayText"
+                    android:layout_below="@id/rl_topItem" />
+            </RelativeLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:tabMode="fixed"
+                app:tabTextColor="@color/colorBlack"
+                app:tabSelectedTextColor="@color/colorBlue"/>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/ProgressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+<!--        <FrameLayout-->
+<!--            android:id ="@+id/fragment_container_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+
+<!--            app_layout_behavior="@string/bottom_sheet_behavior"/>-->
+        <include
+            layout="@layout/layout_fabbtn"
+            android:id="@+id/rl_fabbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+<!--        <FrameLayout-->
+<!--            android:id="@+id/fragment_container_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:elevation="10dp"-->
+<!--            app:behavior_hideable="true"-->
+
+<!--            app:layout_behavior="@string/bottom_sheet_behavior"/>-->
+
+<!--        <FrameLayout-->
+<!--            android_id="@+id/design_bottom_sheet"-->
+<!--            android_layout_width="match_parent"-->
+<!--            android_layout_height="wrap_content"-->
+<!--            android_background="@android:color/holo_green_light"-->
+<!--            -->
+<!--            android_paddingTop="8dp"-->
+
+<!--            app_layout_behavior="android.support.design.widget.BottomSheetBehavior"/>-->
+        <FrameLayout
+            android:id="@+id/fl_fragmentcontainerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="50dp"
+            app:behavior_hideable="true"
+            app:behavior_skipCollapsed="true"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

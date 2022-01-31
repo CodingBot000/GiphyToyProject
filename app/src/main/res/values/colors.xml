@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name ="colorLogoBack">#ff0849</color>
+<!--    <color name ="colorPrimary">#008577</color>-->
+<!--    <color name ="colorPrimaryDark">#00574B</color>-->
+    <color name ="colorPrimary">#FFFFFF</color>
+    <color name ="colorPrimaryDark">#FFFFFF</color>
+    <color name ="colorAccent">#D81B60</color>
+    <color name ="colorWhite">#FFFFFF</color>
+    <color name ="colorBlack">#000000</color>
+    <color name ="colorDarkSky">#9bbbd4</color>
+    <color name ="colorGrayText">#556677</color>
+    <color name = "colorRed">#ff0000</color>
+    <color name = "colorOrange">#ff8c00</color>
+    <color name = "colorYellow">#ffff00</color>
+    <color name = "colorGreen">#008000</color>
+    <color name = "colorBlue">#0000ff</color>
+    <color name = "colorIndigo">#4b0082</color>
+    <color name = "colorPurple">#800080</color>
+</resources>

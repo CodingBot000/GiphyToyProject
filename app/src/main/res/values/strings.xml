@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">GiphyToyProject</string>
+    <string name="plusBtnMsg">Plus 버튼입니다.</string>
+    <string name="msgMore">see more.</string>
+    <string name="msgSend">Sharing</string>
+    <string name="ok">OK</string>
+    <string name="onemoretime">press one more time</string>
+    <string name="noFavorites">No favorites</string>
+    <string name="detail_middle_msg">Related GIFs</string>
+    <string name="tabNameTrending">Trending</string>
+    <string name="tabNameArtists">Artists</string>
+    <string name="tabNameClips">Clips</string>
+    <string name="tabNameStories">Stories</string>
+    <string name="tabNameStickers">Stickers</string>
+    <string name="tabNameEmoji">Emoji</string>
+    <string name="tabNameFavorite">Favorite</string>
+    <string name="tabNameUpload">Upload</string>
+    <string name="collapseTitle">This is My Name</string>
+    <string name="uploadViewModelText">Upload 예시 입니다.</string>
+    <string name="favorite_check">I like it</string>
+    <string name="favorite_uncheck">I dislike it</string>
+    <string name="favoriteTitle">My Favorites</string>
+
+    <string name="edttext_hint">Insert Search keyword</string>
+    <string name="notiMessage">Welcome to GIFs</string>
+    <string name="initialNotiMessage">Notify when there is new GIFs</string>
+    <string name="newDataNotiMessage">New GIfs here is! Click Me!</string>
+    <string name="retry">RETRY</string>
+    <string name="favorite_item_delete_all">모든 아이템을 삭제하겠습니까?</string>
+    <string name="favorite_item_delete_all_msg">%1$d 개 아이템이 삭제되었습니다.</string>
+
+    <string name="dialog_default_title">안내</string>
+    <string name="dialog_default_ok">OK</string>
+    <string name="dialog_default_cancel">Cancel</string>
+    <string name="dialog_default_neutral">Neutral</string>
+
+    <string name="menu_item_favorite">Favorite</string>
+    <string name="menu_item_share">Share</string>
+</resources>
