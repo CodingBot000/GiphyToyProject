@@ -145,6 +145,11 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
                 closeEvent()
             }
             btnRemoveAll.setOnClickListener {
+                if (adapterRecycler.itemCount == 0) {
+                    toastMsg(R.string.favorite_item_delete_cannot)
+                    return@setOnClickListener
+                }
+
                 requireActivity().alertDialog(
                     msg = getString(R.string.favorite_item_delete_all),
                     onClickOK = {

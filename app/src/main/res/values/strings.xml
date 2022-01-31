@@ -16,7 +16,6 @@
     <string name="tabNameFavorite">Favorite</string>
     <string name="tabNameUpload">Upload</string>
     <string name="collapseTitle">This is My Name</string>
-    <string name="uploadViewModelText">Upload 예시 입니다.</string>
     <string name="favorite_check">I like it</string>
     <string name="favorite_uncheck">I dislike it</string>
     <string name="favoriteTitle">My Favorites</string>
@@ -26,10 +25,11 @@
     <string name="initialNotiMessage">Notify when there is new GIFs</string>
     <string name="newDataNotiMessage">New GIfs here is! Click Me!</string>
     <string name="retry">RETRY</string>
-    <string name="favorite_item_delete_all">모든 아이템을 삭제하겠습니까?</string>
-    <string name="favorite_item_delete_all_msg">%1$d 개 아이템이 삭제되었습니다.</string>
+    <string name="favorite_item_delete_all">Are you sure you want to delete all items??</string>
+    <string name="favorite_item_delete_all_msg">%1$d items have been removed.</string>
+    <string name="favorite_item_delete_cannot">There are no items to delete.</string>
 
-    <string name="dialog_default_title">안내</string>
+    <string name="dialog_default_title">Info</string>
     <string name="dialog_default_ok">OK</string>
     <string name="dialog_default_cancel">Cancel</string>
     <string name="dialog_default_neutral">Neutral</string>
