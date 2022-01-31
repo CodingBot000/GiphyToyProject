@@ -82,5 +82,5 @@ API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이
 
 
 [전체 구조도 요약]
-![Alt text](https://github.com/CodingBot000/Staggered_ViewPager_Tab/blob/main/GiphyTestApp_v1.jpg?raw=true)
+![Alt text](https://github.com/CodingBot000/GiphyToyProject/blob/main/GiphyTestApp.drawio.png)
 
