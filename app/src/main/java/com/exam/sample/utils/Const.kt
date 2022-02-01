@@ -16,9 +16,6 @@ class Const {
 
         const val LIST_SPAN_COUNT = 3
 
-        const val EXTRA_KEY_ACTIVITY_RESULT_DETAILACTIVITY_CLOSE_ADDARRAY = "extra_key_detailactivity_close_addarray"
-        const val EXTRA_KEY_ACTIVITY_RESULT_DETAILACTIVITY_CLOSE_REMOVEARRAY = "extra_key_detailactivity_close_removearray"
-
         const val EXTRA_KEY_ACTIVITY_RESULT_DETAILACTIVITY_CLOSE = "extra_key_detailactivity_close"
 
         const val EXTRA_KEY_INTERACTION = "INTERACTION"
