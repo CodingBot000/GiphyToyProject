@@ -1,12 +1,16 @@
 package com.exam.sample.ui.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.EmptyResultSetException
 import com.exam.sample.R
@@ -16,6 +20,7 @@ import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.ui.base.BaseFragment
+import com.exam.sample.ui.state.UIState
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Status
 import com.exam.sample.utils.extention.alertDialog
@@ -24,6 +29,7 @@ import com.exam.sample.utils.extention.touchEffect
 import com.exam.sample.utils.snackBarSimpleAlert
 import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.FavoriteViewModel
+import com.exam.sample.viewmodel.MainSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,12 +40,21 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
     override val layoutResID: Int
         get() = R.layout.fragment_favorite
 
+    private val sharedViewModel by activityViewModels<MainSharedViewModel>()
     private val viewModel by viewModels<FavoriteViewModel>()
     private val adapterRecycler: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item, gridBindingItem ->
             gridBindingItem.img.touchEffect(requireActivity())
-            requireActivity().startActivityDetailExtras(DetailActivity::class.java, item)
+            requireActivity().startActivityDetailExtras(DetailActivity::class.java, item, requestActivity)
         })
+    }
+
+
+    val requestActivity = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { activityResult ->
+        if (activityResult.resultCode == Activity.RESULT_OK)
+            sharedViewModel.notiFavoriteDBListRefreshEventToActivity()
     }
 
     override fun onCreateView(
@@ -80,6 +95,20 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
                     binding.progress.isVisible = it
                 }
             )
+
+            sharedViewModel.uiStateToFragment.asLiveData().observe(requireActivity(), androidx.lifecycle.Observer {
+                Log.v(TAG,"$TAG sharedViewModel uiStateToFragment event :$it")
+                when (it) {
+                    UIState.INIT -> {
+                    }
+                    UIState.ORDER_REFRESH_DBLIST_FAVORITE -> {
+                        initData()
+                    } else -> {
+
+                    }
+                }
+            })
+
 
             dbEvent.observe(
                 requireActivity(),

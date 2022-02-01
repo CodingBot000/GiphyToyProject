@@ -1,5 +1,6 @@
 package com.exam.sample.viewmodel
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.exam.sample.domain.usecase.*
 import com.exam.sample.livedata.Event
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.data.TrendingDetail
+import com.exam.sample.model.repository.search.ClipPagingRepository
 import com.exam.sample.model.repository.search.SearchPagingRepository
 import com.exam.sample.model.repository.trending.TrendingPagingRepository
 import com.exam.sample.utils.Resource
@@ -25,19 +27,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClipsViewModel @Inject constructor(
-    private val searchPagingRepository: SearchPagingRepository
+    private val clipsPagingRepository: ClipPagingRepository
 ) : BaseViewModel()
 {
     private var job: Job? = null
     private var dataFlow: Flow<PagingData<TrendingDetail>> = flow { }
     var dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
 
+    @WorkerThread
     fun getClipsData(keyword: String) {
         if (!isNetworkConnected())
             return
         job?.cancel()
         job = viewModelScope.launch {
-            dataFlow = searchPagingRepository.getPagingData(keyword)
+            dataFlow = clipsPagingRepository.getPagingData(keyword)
             dataFlow.cachedIn(viewModelScope).collectLatest {
                 dataListLiveData.value = it
             }

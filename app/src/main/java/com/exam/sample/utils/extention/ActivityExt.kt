@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.ImageView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.exam.sample.R
@@ -14,14 +15,21 @@ import com.exam.sample.utils.Const
 import com.exam.sample.utils.checkIsMaterialVersion
 import kotlin.math.max
 
-fun <T> Activity.startActivityDetailExtras(clazz: Class<T>, it: TrendingDetail) {
+
+
+
+fun <T> Activity.startActivityDetailExtras(clazz: Class<T>, it: TrendingDetail, launcher: ActivityResultLauncher<Intent>? =  null) {
     val intent = Intent(this, clazz)
     intent.putExtra(
         Const.EXTRA_KEY_INTERACTION,
         it.convertInteractionData()
     )
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-    startActivity(intent)
+    launcher?.let {
+        it.launch(intent)
+    } ?: run {
+        startActivity(intent)
+    }
     slideUp()
 }
 

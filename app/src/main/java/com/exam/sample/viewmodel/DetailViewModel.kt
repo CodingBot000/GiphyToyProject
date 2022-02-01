@@ -1,6 +1,7 @@
 package com.exam.sample.viewmodel
 
 import android.annotation.SuppressLint
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exam.sample.domain.usecase.*
@@ -44,6 +45,7 @@ class DetailViewModel @Inject constructor(
         hideProgress()
     }
 
+    @WorkerThread
     fun getDetailData(id: String) {
         if (!isNetworkConnected())
             return
@@ -65,6 +67,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
+    @WorkerThread
     fun insertFavorite(favoriteInfo: FavoriteInfo) =
         with(useCaseDbInsert) {
             setData(favoriteInfo)
@@ -80,6 +83,7 @@ class DetailViewModel @Inject constructor(
             )
         }
 
+    @WorkerThread
     fun removeFavorite(favoriteInfo: FavoriteInfo) =
         with(useCaseDbRemove) {
             setData(favoriteInfo)
@@ -95,6 +99,7 @@ class DetailViewModel @Inject constructor(
             )
         }
 
+    @WorkerThread
     @SuppressLint("CheckResult")
     fun getFavorite(userId: String) =
         with(useCaseDbSelect) {

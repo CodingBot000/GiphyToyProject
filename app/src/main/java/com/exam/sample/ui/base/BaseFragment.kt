@@ -1,9 +1,11 @@
 package com.exam.sample.ui.base
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -36,6 +38,7 @@ abstract class BaseFragment<B : ViewDataBinding?, VM : BaseViewModel>() : Fragme
 
         initObserver()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

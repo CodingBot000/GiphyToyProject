@@ -2,6 +2,7 @@ package com.exam.sample.viewmodel
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exam.sample.domain.usecase.*
@@ -31,6 +32,7 @@ class FavoriteViewModel @Inject constructor(
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
 
+    @WorkerThread
     fun getFavoriteInfoRequest(list: List<FavoriteInfo>) {
         if (list.isEmpty())
             return
@@ -60,6 +62,7 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    @WorkerThread
     @SuppressLint("CheckResult")
     fun getFavoriteAll() {
         showProgress()
@@ -76,6 +79,7 @@ class FavoriteViewModel @Inject constructor(
         )
     }
 
+    @WorkerThread
     fun removeAllFavoriteDB() {
         useCaseDbRemoveAll.execute(
             onSuccess = {

@@ -16,6 +16,11 @@ class Const {
 
         const val LIST_SPAN_COUNT = 3
 
+        const val EXTRA_KEY_ACTIVITY_RESULT_DETAILACTIVITY_CLOSE_ADDARRAY = "extra_key_detailactivity_close_addarray"
+        const val EXTRA_KEY_ACTIVITY_RESULT_DETAILACTIVITY_CLOSE_REMOVEARRAY = "extra_key_detailactivity_close_removearray"
+
+        const val EXTRA_KEY_ACTIVITY_RESULT_DETAILACTIVITY_CLOSE = "extra_key_detailactivity_close"
+
         const val EXTRA_KEY_INTERACTION = "INTERACTION"
         const val LIMIT = 15 // The maximum number of objects to return. (Default: “25”)
         const val OFFSET_DEFAULT = 0 // Specifies the starting position of the results. Defaults to 0.

@@ -1,6 +1,7 @@
 package com.exam.sample.ui
 
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -223,9 +224,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     override fun finish() {
-        super.finish()
+        setResult(RESULT_OK)
         slideDown()
-
+        super.finish()
     }
     override fun onDestroy() {
         super.onDestroy()

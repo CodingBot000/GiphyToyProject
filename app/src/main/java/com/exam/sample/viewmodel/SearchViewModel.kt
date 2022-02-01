@@ -1,5 +1,6 @@
 package com.exam.sample.viewmodel
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -35,9 +36,6 @@ class SearchViewModel @Inject constructor (
 {
     private val textChangeSubject = PublishSubject.create<String>()
 
-    private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
-    val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
-
     init {
         textChangeSubject.onNext("")
     }
@@ -46,6 +44,7 @@ class SearchViewModel @Inject constructor (
     private var dataFlow: Flow<PagingData<TrendingDetail>> = flow { }
     var dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
 
+    @WorkerThread
     fun getSearchData(keyword: String) {
         if (!isNetworkConnected())
             return

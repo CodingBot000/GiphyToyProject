@@ -22,10 +22,6 @@ class ReposLoadStateViewHolder(
         if (loadState is LoadState.Error) {
             binding.errorMsg.text = loadState.error.localizedMessage
         }
-//        Log.v("qq","qq loadState is LoadState.Loading  ${loadState is LoadState.Loading}")
-//        Log.v("qq","qq loadState is LoadState.Error  ${loadState is LoadState.Error}")
-//        binding.progressBar.isVisible = loadState is LoadState.Loading
-//        binding.retryButton.isVisible = loadState is LoadState.Error
         binding.progressBar.isVisible = loadState is LoadState.Error
         binding.errorMsg.isVisible = loadState is LoadState.Error
     }

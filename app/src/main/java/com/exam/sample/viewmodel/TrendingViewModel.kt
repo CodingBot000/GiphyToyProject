@@ -1,5 +1,6 @@
 package com.exam.sample.viewmodel
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -25,14 +26,11 @@ class TrendingViewModel @Inject constructor(
     private val trendingPagingRepository: TrendingPagingRepository
     ) : BaseViewModel()
 {
-    private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
-    val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
-
-
     private var job: Job? = null
     private var dataFlow: Flow<PagingData<TrendingDetail>> = flow { }
     var dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
 
+    @WorkerThread
     fun getTrendingData(rating: String = "") {
         if (!isNetworkConnected())
             return

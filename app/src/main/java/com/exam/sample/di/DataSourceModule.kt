@@ -5,6 +5,8 @@ import com.exam.sample.database.FavoriteDao
 import com.exam.sample.domain.usecase.UseCaseGetTrendingData
 import com.exam.sample.model.datasource.local.favorite.FavoriteInfoLocalDataSource
 import com.exam.sample.model.datasource.local.favorite.FavoriteInfoLocalDataSourceImpl
+import com.exam.sample.model.datasource.remote.artist.ArtistPagingSource
+import com.exam.sample.model.datasource.remote.clip.ClipPagingSource
 import com.exam.sample.model.datasource.remote.detail.DetailDataRemoteDataSource
 import com.exam.sample.model.datasource.remote.detail.DetailDataRemoteDataSourceImpl
 import com.exam.sample.model.datasource.remote.favorite.FavoriteInfoRemoteDataSource
@@ -18,6 +20,7 @@ import com.exam.sample.model.datasource.remote.trending.TrendingRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -57,12 +60,20 @@ object DataSourceModule {
             FavoriteInfoLocalDataSource = FavoriteInfoLocalDataSourceImpl(favoriteDao)
 
 
-
-
     @Singleton
     @Provides
     fun provideTrendingPagingSource(apiService: ApiService):
             TrendingPagingSource = TrendingPagingSource(apiService)
+
+    @Singleton
+    @Provides
+    fun provideArtistPagingSource(apiService: ApiService):
+            ArtistPagingSource = ArtistPagingSource(apiService)
+
+    @Singleton
+    @Provides
+    fun provideClipPagingSource(apiService: ApiService):
+            ClipPagingSource = ClipPagingSource(apiService)
 
     @Singleton
     @Provides

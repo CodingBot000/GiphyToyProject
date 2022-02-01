@@ -1,32 +1,37 @@
 package com.exam.sample.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.asLiveData
+import com.exam.sample.R
 import com.exam.sample.adapter.ScreenSlideViewPagerAdapter
 import com.exam.sample.databinding.ActivityMainBinding
 import com.exam.sample.ui.base.BaseActivity
+import com.exam.sample.ui.fragment.*
+import com.exam.sample.ui.state.UIState
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.animation.ZoomOutPageTransformer
+import com.exam.sample.utils.delayOnLifecycle
 import com.exam.sample.utils.toastMsg
+import com.exam.sample.viewmodel.MainSharedViewModel
 import com.exam.sample.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import com.exam.sample.R
-import com.exam.sample.ui.fragment.*
-import com.exam.sample.ui.state.UIState
-import com.exam.sample.utils.delayOnLifecycle
-import com.exam.sample.viewmodel.MainSharedViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 @AndroidEntryPoint
@@ -56,6 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private var isFabOpen = false
 
     private var backKeyPressedTime: Long = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +117,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 UIState.INIT_UI_MAINACT -> {
                     if (isFabOpen)
                         toggleFab()
+                }
+                UIState.REQ_REFRESH_DBLIST_FAVORITE -> {
+                    if (isBottomSheetShow() ) {
+                        val attachedFragment = this@MainActivity.supportFragmentManager.findFragmentById(R.id.fragment_container_view)
+                        if (attachedFragment is FavoriteFragment)
+                            sharedViewModel.notiFavoriteDBListRefreshEventToFavoriteView()
+
+                    }
                 } else -> {
 
                 }
@@ -189,14 +203,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 hideBottomSheet()
             }
             R.id.fabSearch -> {
-//                val testFragment = TestFragment()
-//                addFragmentToBottomSheet(testFragment)
-//                showBottomSheet()
-
-//                binding.root.delayOnLifecycle(2500L) {
-//                    addFragmentToBottomSheet(searchFragment)
-//                }
-
                 addFragmentToBottomSheet(searchFragment)
                 showBottomSheet()
             }
@@ -209,13 +215,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
     private fun addFragmentToBottomSheet(fragment: Fragment) {
-
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container_view, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
-
-
     }
 
     private fun showBottomSheet() {
@@ -247,7 +250,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun onBackPressed() {
-        Log.v("qq","qq onBackPreesseed")
         if (isBottomSheetShow()) {
             hideBottomSheet()
             return

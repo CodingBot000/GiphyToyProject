@@ -1,12 +1,19 @@
 package com.exam.sample.ui.fragment
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Typeface.create
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
@@ -25,6 +32,7 @@ import com.exam.sample.common.LoadMoreScrollListener
 import com.exam.sample.databinding.FragmentTrendingBinding
 import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
+import com.exam.sample.model.data.TrendingDetail
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.ui.base.BaseFragment
 import com.exam.sample.utils.*
@@ -55,15 +63,14 @@ class TrendingFragment : BaseFragment<FragmentTrendingBinding, TrendingViewModel
 
     private lateinit var lManager: StaggeredGridLayoutManager
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-
         initData()
-
         return binding.root
     }
 
