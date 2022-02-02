@@ -69,7 +69,7 @@ API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이
 
 이미지를 누르시면 앱 동작 영상 확인가능하십니다
 
-
+(https://youtu.be/ZPj4myoBoHw)
 
 [전체 구조도 요약]
 ![Alt text](https://github.com/CodingBot000/GiphyToyProject/blob/main/GiphyTestApp.drawio.png)
