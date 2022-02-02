@@ -51,22 +51,12 @@ DaggerHilt
 UseCase로 분리해서 관림사를 더 세분화. 코드 중복 감소
 SingUseCase를 이용하여 한번에 하나씩만 실행 -> disposable처리 적용
 
-* WorkManager
-15분에 한번씩 API call을 해서 이전 데이터와 새로가져온 데이터가 다른지 검사해서
-다를 경우 notification에 새로운 데이터가 나타났다고 알림을 보여줌.
-
-* Service 
-Const.kt에서 FOREGROUND 상수값을 true로 변경하면 WorkManager대산 Service 구동
-백그라운드로 앱이 내려가면 백그라운드에서 10초에 한번씩 req를 보내서 이전 데이터와 변경사항이있나 체크
-있으면 noti로 변경사항이 발생한걸 알려주고 req 전송 중단.
-
 * 검색어처리
 검색시 입력문자 변경에 따라 검색버튼 클리없이 실시간 체크해서 검색실행 (RxJava사용)
 
 * CompositeDisposable
 모든 RxJava 네트워크, DB 접근 이벤트를 UseCase 로 옮겼기때문에 기존 ViewModel에는 더이상  compositeDisposable이 없음.
 SigleUseCase를 통해 제거 후 사용으로 바로바로 제거가 되어 메모리누수 리스크를 최소화 시킴.
-
 
 
 StaggerdGridLayout

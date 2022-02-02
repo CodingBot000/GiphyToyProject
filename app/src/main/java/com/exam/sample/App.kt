@@ -3,18 +3,15 @@ package com.exam.sample
 
 import android.app.Application
 import android.util.Log
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.work.Configuration
 import com.exam.sample.common.ApplicationLifeCycleListener
 import com.exam.sample.utils.Const
 import com.facebook.stetho.Stetho
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 
 @HiltAndroidApp
-class App : Application(), Configuration.Provider {
+class App : Application() {
     companion object {
         private var sApplication: Application? = null
         private var sApplicationLifecycle: Lifecycle.Event? = null
@@ -27,15 +24,6 @@ class App : Application(), Configuration.Provider {
             return sApplicationLifecycle ?: Lifecycle.Event.ON_START
         }
     }
-
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .build()
-
-
 
     override fun onCreate() {
         super.onCreate()
