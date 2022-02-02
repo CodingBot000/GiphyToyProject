@@ -8,6 +8,14 @@ Giphy Api를 활용한 Test Toy Project
 Coding style 및 구조 잡는 것 정도만 확인할수 있는 수준정도의 가벼운 프로젝트입니다.
 
 
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
+
+이미지를 누르시면 앱 동작 영상을 유튜브를 통해 확인가능하십니다
+
+
+
+
 ****************************************
 * 일부러 Coroutine과 RxJava를 같이썼습니다.
 LoadMore가  필요한 부분은 Coroutine + Paging 처리
@@ -62,13 +70,6 @@ SigleUseCase를 통해 제거 후 사용으로 바로바로 제거가 되어 메
 StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
 API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이즈를 고정하여 안정적 로딩하도록 하였습니다.
-
-
-
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
-
-이미지를 누르시면 앱 동작 영상 확인가능하십니다
 
 
 [전체 구조도 요약]
