@@ -13,7 +13,6 @@ abstract class BaseActivity<B : ViewDataBinding?, VM : BaseViewModel>() : AppCom
     var _binding: B? = null
     val binding: B get() = _binding!!
 
-//    abstract val viewModel: VM
     abstract val layoutResID: Int
     abstract val TAG: String
 

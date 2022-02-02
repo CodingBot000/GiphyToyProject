@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/layout/bottombar_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/detail_middle_view.xml" value="0.2318840579710145" />
         <entry key="app/src/main/res/layout/dialog_fragment_test.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_artists.xml" value="0.10869565217391304" />
         <entry key="app/src/main/res/layout/fragment_clips.xml" value="0.14764492753623187" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.1671195652173913" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.14764492753623187" />

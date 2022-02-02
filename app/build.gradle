@@ -89,7 +89,9 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$daggerhilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$daggerhilt_version"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
-    implementation "androidx.hilt:hilt-work:1.0.0"
+//    implementation "androidx.hilt:hilt-work:1.0.0"
+    implementation 'androidx.hilt:hilt-work:1.0.0-alpha01'
+
 
     implementation "androidx.paging:paging-runtime:$paging_version"
     // alternatively - without Android dependencies for tests

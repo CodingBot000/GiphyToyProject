@@ -7,12 +7,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.app.NotificationCompat
 import com.exam.sample.App
 import com.exam.sample.R
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.toastMsg
+import com.exam.sample.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 import java.text.SimpleDateFormat
@@ -48,30 +50,31 @@ class ServiceDataChangeObserver : Service() {
             }
         }
 
-        BackgroundAPICall.getInstance().serviceListener = object : BackgroundAPICall.ServiceListener {
-            override fun listenerFromService(data: TrendingData) {
-                Log.d(Const.LOG_TAG, "Service listenerFromService")
-                // 데이터를 정기적으로 받아온다.
-                // 받아온 데이터가 이전데이터와 다르다면 데이터가 변경되었으므로 푸시로 알린다.
-                // 변경 알림을 통보한 후  더이상 서비스를 동작시키지않는다.
-                dataOld?.let {
-                    if ((dataOld as TrendingData).trendingItems[0].embed_url == data.trendingItems[0].embed_url) {
-                        Log.v(Const.LOG_TAG, "noti msg equals $debugCnt")
-                    } else {
-                        Log.v(Const.LOG_TAG, "noti msg NOT equals $debugCnt")
-
-                        stopSelf()
-                        DataChangeNotification.updateMessage(
-                            App.getApplication().getString(R.string.newDataNotiMessage)
-                        )
-                    }
-                    debugCnt++
-                }
-                dataOld = data
-            }
-        }
+//        viewModel.serviceListener = object : MainViewModel.ServiceListener {
+//            override fun listenerFromService(data: TrendingData) {
+//                Log.d(Const.LOG_TAG, "Service listenerFromService")
+//                // 데이터를 정기적으로 받아온다.
+//                // 받아온 데이터가 이전데이터와 다르다면 데이터가 변경되었으므로 푸시로 알린다.
+//                // 변경 알림을 통보한 후  더이상 서비스를 동작시키지않는다.
+//                dataOld?.let {
+//                    if ((dataOld as TrendingData).trendingItems[0].embed_url == data.trendingItems[0].embed_url) {
+//                        Log.v(Const.LOG_TAG, "noti msg equals $debugCnt")
+//                    } else {
+//                        Log.v(Const.LOG_TAG, "noti msg NOT equals $debugCnt")
+//
+//                        stopSelf()
+//                        DataChangeNotification.updateMessage(
+//                            App.getApplication().getString(R.string.newDataNotiMessage)
+//                        )
+//                    }
+//                    debugCnt++
+//                }
+//                dataOld = data
+//            }
+//        }
         return START_STICKY
     }
+
 
     override fun onDestroy() {
         mTimer?.cancel()
@@ -106,7 +109,7 @@ class ServiceDataChangeObserver : Service() {
         }
 
         override fun run() {
-            BackgroundAPICall.getInstance().getDataFromBackground(0)
+//            BackgroundAPICall.getInstance().getDataFromBackground(0)
             toastMsg("request API for searching change data in Background ${getDateTime()}")
             Log.v(Const.LOG_TAG, "getDateTime()  ${getDateTime()}")
         }

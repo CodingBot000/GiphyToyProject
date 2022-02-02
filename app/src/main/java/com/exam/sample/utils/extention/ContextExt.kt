@@ -19,11 +19,11 @@ fun Context.alertDialog(title: String = getString(R.string.dialog_default_title)
     val builder: AlertDialog.Builder = Builder(this)
     builder.setTitle(title).setMessage(msg)
     builder.setPositiveButton(ok,
-        DialogInterface.OnClickListener { dialog, id ->
+        DialogInterface.OnClickListener { _, _ ->
             onClickOK()
         })
     builder.setNegativeButton(cancel,
-        DialogInterface.OnClickListener { dialog, id ->
+        DialogInterface.OnClickListener { _, _ ->
             onClickCancel()
         })
     val alertDialog: AlertDialog = builder.create()
