@@ -64,9 +64,9 @@ StaggerdGridLayout
 API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이즈를 고정하여 안정적 로딩하도록 하였습니다.
 
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)]
 
-[![IMAGE ALT TEXT HERE](https://i9.ytimg.com/vi/ZPj4myoBoHw/mqdefault.jpg?sqp=CPCn348G&rs=AOn4CLBXZc7NGtMJuFuf-CbFUPcgG1IUGA)](https://youtu.be/ZPj4myoBoHw)
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
 
 이미지를 누르시면 앱 동작 영상 확인가능하십니다
 
