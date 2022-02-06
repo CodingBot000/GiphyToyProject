@@ -1,6 +1,9 @@
 package com.exam.sample.viewmodel
 
 import android.annotation.SuppressLint
+import android.util.Log
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +13,8 @@ import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.InteractionData
 import com.exam.sample.model.data.TrendingData
+import com.exam.sample.ui.state.CheckBoxState
+import com.exam.sample.ui.state.DBState
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.isNetworkConnected
@@ -27,8 +32,8 @@ class DetailViewModel @Inject constructor(
 {
     private val _dbEvent = MutableLiveData<Event<Resource<DBResultData>>>()
     val dbEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbEvent
-    private val _favoriteCheckEvent = MutableLiveData<Event<Boolean>>()
-    val favoriteCheckEvent: LiveData<Event<Boolean>> get() = _favoriteCheckEvent
+    private val _favoriteCheckEvent = MutableLiveData<Event<CheckBoxState>>()
+    val favoriteCheckEvent: LiveData<Event<CheckBoxState>> get() = _favoriteCheckEvent
     private val _btnSimpleEvent = MutableLiveData<Event<Int>>()
     val btnSimpleEvent: LiveData<Event<Int>> get() = _btnSimpleEvent
 
@@ -73,10 +78,10 @@ class DetailViewModel @Inject constructor(
             setData(favoriteInfo)
             execute(
                 onSuccess = {
-                    _dbEvent.postValue(Event(Resource.success(DBResultData(Const.DB_INSERT, null, true))))
+                    _dbEvent.postValue(Event(Resource.success(DBResultData(DBState.DB_INSERT, null, true))))
                 },
                 onError = {
-                    _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_INSERT, null, false))))
+                    _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(DBState.DB_INSERT, null, false))))
                 },
                 onFinished = {
                 }
@@ -89,10 +94,10 @@ class DetailViewModel @Inject constructor(
             setData(favoriteInfo)
             execute(
                 onSuccess = {
-                    _dbEvent.postValue(Event(Resource.success(DBResultData(Const.DB_DELETE, null, true))))
+                    _dbEvent.postValue(Event(Resource.success(DBResultData(DBState.DB_DELETE, null, true))))
                 },
                 onError = {
-                    _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_DELETE, null, false))))
+                    _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(DBState.DB_DELETE, null, false))))
                 },
                 onFinished = {
                 }
@@ -106,18 +111,26 @@ class DetailViewModel @Inject constructor(
             setData(userId)
             execute(
                 onSuccess = {
-                    _dbEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it, true))))
+                    _dbEvent.postValue(Event(Resource.success(DBResultData(DBState.DB_SELECT, it, true))))
                 },
                 onError = {
-                    _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_SELECT, it, false))))
+                    _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(DBState.DB_SELECT, it, false))))
                 },
                 onFinished = {
                 }
             )
         }
 
-    fun checkBoxChecked(b: Boolean) {
-        _favoriteCheckEvent.value = Event(b)
+    fun checkBoxChecked(isChecked: Boolean, compoundButton: CompoundButton) {
+        val state = when {
+            (isChecked && compoundButton.isPressed) -> CheckBoxState.PRESSED_CHECK
+            (!isChecked && compoundButton.isPressed) -> CheckBoxState.PRESSED_UNCHECK
+            (isChecked && !compoundButton.isPressed) -> CheckBoxState.INIT_CHECK
+            (!isChecked && !compoundButton.isPressed) -> CheckBoxState.INIT_UNCHECK
+            else -> CheckBoxState.INIT
+        }
+
+        _favoriteCheckEvent.value = Event(state)
     }
 
     fun btnClickEventSend(index: Int) {

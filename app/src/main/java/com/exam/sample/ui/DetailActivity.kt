@@ -22,6 +22,8 @@ import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.InteractionData
 import com.exam.sample.ui.base.BaseActivity
+import com.exam.sample.ui.state.CheckBoxState
+import com.exam.sample.ui.state.DBState
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Status
 import com.exam.sample.utils.extention.glideLoadForUrl
@@ -53,8 +55,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
         })
     }
     private lateinit var lManager: StaggeredGridLayoutManager
-
     private lateinit var interactionDataTmp: InteractionData
+    private var setResultValue = RESULT_OK
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -104,10 +107,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                 EventObserver {
                     when (it.status) {
                         Status.SUCCESS -> {
-                            if (it.data?.flag == Const.DB_SELECT) {
+                            if (it.data?.flag == DBState.DB_SELECT) {
                                 binding.llTopInfoView.checkBoxFavorite.isChecked = it.data.data != null
                             } else {
-                                if (it.data?.flag == Const.DB_INSERT)
+                                if (it.data?.flag == DBState.DB_INSERT)
                                     makeSnackBar(R.string.favorite_check, R.string.favorite_uncheck)
                                 else
                                     makeSnackBar(R.string.favorite_uncheck, R.string.favorite_check)
@@ -144,27 +147,21 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
             favoriteCheckEvent.observe(
                 this@DetailActivity,
                 EventObserver {
+                    setResultValue = RESULT_OK
                     interactionDataTmp.apply {
-                        if (it) {
-                            insertFavorite(
-                                FavoriteInfo(
-                                    userId,
-                                    urlSmall,
-                                    type
-                                )
-                            )
-                        } else {
-                            removeFavorite(
-                                FavoriteInfo(
-                                    userId,
-                                    urlSmall,
-                                    type
-                                )
-                            )
+                        when (it) {
+                            CheckBoxState.PRESSED_CHECK ->
+                                insertFavorite(FavoriteInfo(userId, urlSmall, type))
+
+                            CheckBoxState.PRESSED_UNCHECK ->
+                                removeFavorite(FavoriteInfo(userId, urlSmall, type))
+
+                            else -> {
+                                setResultValue = RESULT_CANCELED
+                            }
                         }
                     }
-                }
-            )
+                })
 
             btnSimpleEvent.observe(
                 this@DetailActivity,
@@ -224,7 +221,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     override fun finish() {
-        setResult(RESULT_OK)
+        setResult(setResultValue)
         slideDown()
         super.finish()
     }

@@ -23,7 +23,7 @@
             android:layout_toStartOf="@id/btnSend"
             android:background="@drawable/checkbox"
             android:button="@null"
-            android:onCheckedChanged="@{(compoundButton, checked) -> viewModel.checkBoxChecked(checked)}" />
+            android:onCheckedChanged="@{(compoundButton, checked) -> viewModel.checkBoxChecked(checked, compoundButton)}" />
         <ImageButton
             android:id = "@+id/btnSend"
             android:layout_width="@dimen/middle_icon_size"

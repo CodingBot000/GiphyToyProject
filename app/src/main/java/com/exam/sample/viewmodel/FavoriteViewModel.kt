@@ -10,6 +10,7 @@ import com.exam.sample.livedata.Event
 import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
+import com.exam.sample.ui.state.DBState
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Resource
 import com.exam.sample.viewmodel.base.BaseViewModel
@@ -68,10 +69,10 @@ class FavoriteViewModel @Inject constructor(
         showProgress()
         useCaseDbSelectAll.execute(
             onSuccess = {
-                _dbEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it, true))))
+                _dbEvent.postValue(Event(Resource.success(DBResultData(DBState.DB_SELECT, it, true))))
             },
             onError = {
-                _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_SELECT, null, false))))
+                _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(DBState.DB_SELECT, null, false))))
             },
             onFinished = {
                 hideProgress()
@@ -83,10 +84,10 @@ class FavoriteViewModel @Inject constructor(
     fun removeAllFavoriteDB() {
         useCaseDbRemoveAll.execute(
             onSuccess = {
-                _dbEvent.postValue(Event(Resource.success(DBResultData(Const.DB_DELETE, it, true))))
+                _dbEvent.postValue(Event(Resource.success(DBResultData(DBState.DB_DELETE, it, true))))
             },
             onError = {
-                _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_DELETE, null, false))))
+                _dbEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(DBState.DB_DELETE, null, false))))
             },
             onFinished = {
             }

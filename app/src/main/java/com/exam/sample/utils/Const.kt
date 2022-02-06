@@ -29,15 +29,7 @@ class Const {
         )
 
         const val DB_NAME = "GiphyFavoriteDB.db"
-        const val DB_SELECT = "SELECT"
-        const val DB_INSERT = "INSERT"
-        const val DB_DELETE = "DELETE"
-        const val DB_UPDATE = "UPDATE"
 
-        const val RX_EVENT_REFRESH_FAVORITE = "RxEventRefreshFavorite"
-
-        const val USE_FOREGROUND = false
-        const val WORKER_TAG = "WORKER_CHANGE_DATA"
         const val NOTI_ID = 1
         const val NOTIFICATION_CHANNEL_ID = "10001"
         const val NOTIFICATION_CHANNEL_NAME = "giphy_new_data"

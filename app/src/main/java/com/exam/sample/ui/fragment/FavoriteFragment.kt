@@ -20,6 +20,7 @@ import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.ui.base.BaseFragment
+import com.exam.sample.ui.state.DBState
 import com.exam.sample.ui.state.UIState
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Status
@@ -116,7 +117,7 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
 
                     when (it.status) {
                         Status.SUCCESS -> {
-                            if (it.data?.flag == Const.DB_DELETE) {
+                            if (it.data?.flag == DBState.DB_DELETE) {
                                 toastMsg(getString(R.string.favorite_item_delete_all_msg, it.data.data as Int))
                                 adapterRecycler.clearItem()
                             } else {
