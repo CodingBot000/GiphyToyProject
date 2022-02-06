@@ -200,7 +200,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         when (it.id) {
             R.id.fabMain -> { }
             R.id.fabHome -> {
-                hideBottomSheet()
+                binding.tabLayout.getTabAt(0)?.select()
             }
             R.id.fabSearch -> {
                 addFragmentToBottomSheet(searchFragment)
