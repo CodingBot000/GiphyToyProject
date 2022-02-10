@@ -1,5 +1,6 @@
 package com.exam.sample.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.exam.sample.ui.state.UIState
 import kotlinx.coroutines.flow.*
@@ -18,10 +19,12 @@ class MainSharedViewModel: ViewModel()
     }
 
     fun notiFavoriteDBListRefreshEventToActivity() {
+        _uiStateToActivity.value = UIState.INIT
         _uiStateToActivity.value = UIState.REQ_REFRESH_DBLIST_FAVORITE
     }
 
     fun notiFavoriteDBListRefreshEventToFavoriteView() {
+        _uiStateToFragment.value = UIState.INIT
         _uiStateToFragment.value = UIState.ORDER_REFRESH_DBLIST_FAVORITE
     }
 

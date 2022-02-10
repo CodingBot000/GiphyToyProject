@@ -1,5 +1,6 @@
 package com.exam.sample.viewmodel
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

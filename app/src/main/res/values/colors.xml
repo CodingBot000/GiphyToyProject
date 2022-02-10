@@ -13,4 +13,5 @@
     <color name = "colorBlue">#0000ff</color>
     <color name = "colorIndigo">#4b0082</color>
     <color name = "colorPurple">#800080</color>
+    <color name = "transparent_black">#1F000000</color>
 </resources>

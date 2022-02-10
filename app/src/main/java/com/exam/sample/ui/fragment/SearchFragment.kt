@@ -2,6 +2,7 @@ package com.exam.sample.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -62,6 +63,7 @@ class SearchFragment constructor(private val closeEvent: () -> Unit) : BaseFragm
         super.onCreateView(inflater, container, savedInstanceState)
 
         binding.viewModel = viewModel
+
         initData()
 
         return binding.root
@@ -132,6 +134,7 @@ class SearchFragment constructor(private val closeEvent: () -> Unit) : BaseFragm
 
     private fun onClickListener() {
         binding.apply {
+            root.setOnTouchListener { _, _ -> true }
             searchToolbar.setNavigationOnClickListener {
                 closeEvent()
             }
@@ -164,12 +167,11 @@ class SearchFragment constructor(private val closeEvent: () -> Unit) : BaseFragm
         viewModel.getSearchKeyChangeObserver()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if (it == keyword)
+            .subscribe { enterKeyword ->
+                if (enterKeyword == keyword)
                     return@subscribe
-                keyword = it
-
-                if (it.isEmpty()) {
+                keyword = enterKeyword
+                if ( keyword.isEmpty()) {
                     adapterRecycler.clearItem()
                 } else {
                     viewModel.getSearchData(keyword)

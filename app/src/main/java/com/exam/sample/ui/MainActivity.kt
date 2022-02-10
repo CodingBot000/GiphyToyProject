@@ -1,16 +1,11 @@
 package com.exam.sample.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -42,16 +37,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         get() = R.layout.activity_main
 
     private val sharedViewModel by viewModels<MainSharedViewModel>()
-    private val viewModel by viewModels<MainViewModel>()
+//    private val viewModel by viewModels<MainViewModel>()
     private val viewPagerAdapter: ScreenSlideViewPagerAdapter by lazy { ScreenSlideViewPagerAdapter(this) }
 
     private val trendingFragment by lazy { TrendingFragment() }
     private val artistsFragment by lazy { ArtistsFragment() }
     private val clipsFragment by lazy { ClipsFragment() }
-    private val searchFragment by lazy { SearchFragment(closeEvent = { hideBottomSheet() }) }
-    private val favoriteFragment by lazy { FavoriteFragment(closeEvent = { hideBottomSheet() }) }
-
-    private val bottomSheetBH by lazy { BottomSheetBehavior.from(binding.flFragmentcontainerview) }
 
     private val fabBtnArray by lazy {
         arrayOf<FloatingActionButton>(binding.rlFabbtn.fabMain, binding.rlFabbtn.fabHome, binding.rlFabbtn.fabSearch, binding.rlFabbtn.fabFavorite)
@@ -76,8 +67,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun init() {
         getScreenSize()
         fabInit()
-        bottomSheetBHInit()
-
 
         viewPagerAdapter.apply {
             addFragment(trendingFragment)
@@ -119,11 +108,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         toggleFab()
                 }
                 UIState.REQ_REFRESH_DBLIST_FAVORITE -> {
-                    if (isBottomSheetShow() ) {
-                        val attachedFragment = this@MainActivity.supportFragmentManager.findFragmentById(R.id.fragment_container_view)
-                        if (attachedFragment is FavoriteFragment)
-                            sharedViewModel.notiFavoriteDBListRefreshEventToFavoriteView()
-
+                    if (isBottomSheetShow() && getCurrentBottomSheetFragment() is FavoriteFragment) {
+                        sharedViewModel.notiFavoriteDBListRefreshEventToFavoriteView()
                     }
                 } else -> {
 
@@ -139,30 +125,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 fabBtn.setOnClickListener(it)
             }
         }
-    }
-
-    private fun bottomSheetBHInit() {
-        bottomSheetBH.isDraggable = false
-        bottomSheetBH.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback()
-        {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        binding.root.delayOnLifecycle(500L) {
-                            val transaction = supportFragmentManager.beginTransaction()
-                            transaction.remove(searchFragment)
-                            transaction.remove(favoriteFragment)
-                            transaction.commit()
-                        }
-
-                    }
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-        })
     }
 
     private fun toggleFab() {
@@ -203,44 +165,44 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 binding.tabLayout.getTabAt(0)?.select()
             }
             R.id.fabSearch -> {
-                addFragmentToBottomSheet(searchFragment)
-                showBottomSheet()
+                val searchFragment = SearchFragment(closeEvent = { closeSearchFragment() })
+                addFragmentToBottomSheet(searchFragment, searchFragment::class.java.simpleName)
             }
             R.id.fabFavorite -> {
-                addFragmentToBottomSheet(favoriteFragment)
-                showBottomSheet()
+                val favoriteFragment = FavoriteFragment(closeEvent = { closeFavoriteFragment() })
+                addFragmentToBottomSheet(favoriteFragment, favoriteFragment::class.java.simpleName)
             }
         }
     }
 
+    private fun closeSearchFragment() = hideBottomSheet()
+    private fun closeFavoriteFragment() = hideBottomSheet()
 
-    private fun addFragmentToBottomSheet(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container_view, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    private fun addFragmentToBottomSheet(fragment: Fragment, fragmentTag: String) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in_bottom_frag,
+                R.anim.slide_out_top_frag,
+                R.anim.slide_in_top_frag,
+                R.anim.slide_out_bottom_frag
+            )
+            .replace(R.id.fl_fragmentcontainerview, fragment, fragmentTag)
+            .addToBackStack(null)
+            .commit()
     }
 
-    private fun showBottomSheet() {
-        bottomSheetBH.let {
-            if (it.state != BottomSheetBehavior.STATE_EXPANDED) {
-                binding.root.delayOnLifecycle(500L) {
-                    it.state = BottomSheetBehavior.STATE_EXPANDED
-                }
-            }
-        }
-    }
 
-    private fun hideBottomSheet() {
-        bottomSheetBH.let {
-            if (it.state != BottomSheetBehavior.STATE_COLLAPSED) {
-                it.state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-        }
-    }
+    private fun hideBottomSheet() =
+        supportFragmentManager.popBackStack()
 
-    private fun isBottomSheetShow(): Boolean
-         = bottomSheetBH.state != BottomSheetBehavior.STATE_COLLAPSED
+
+    private fun isBottomSheetShow(): Boolean =
+         getCurrentBottomSheetFragment() != null
+
+
+    private fun getCurrentBottomSheetFragment(): Fragment? =
+         supportFragmentManager.findFragmentById(R.id.fl_fragmentcontainerview)
+
 
     private fun getScreenSize() {
         val metrics = resources.displayMetrics

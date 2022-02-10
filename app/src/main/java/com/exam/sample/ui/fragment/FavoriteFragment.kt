@@ -1,11 +1,15 @@
 package com.exam.sample.ui.fragment
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -33,6 +37,7 @@ import com.exam.sample.viewmodel.FavoriteViewModel
 import com.exam.sample.viewmodel.MainSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
 
@@ -50,21 +55,16 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
         })
     }
 
+    lateinit var requestActivity: ActivityResultLauncher<Intent>
 
-    val requestActivity = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { activityResult ->
-        if (activityResult.resultCode == Activity.RESULT_OK)
-            sharedViewModel.notiFavoriteDBListRefreshEventToActivity()
-    }
-
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-
+        registActivityResult()
         return binding.root
     }
 
@@ -73,6 +73,14 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
         initData()
     }
 
+    private fun registActivityResult() {
+        requestActivity = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { activityResult ->
+            if (activityResult.resultCode == Activity.RESULT_OK)
+                sharedViewModel.notiFavoriteDBListRefreshEventToActivity()
+        }
+    }
 
     override fun init() {
         if (!adapterRecycler.hasObservers())
@@ -93,7 +101,7 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
             isLoading.observe(
                 requireActivity(),
                 EventObserver {
-                    binding.progress.isVisible = it
+
                 }
             )
 
@@ -168,6 +176,7 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
     }
     private fun onClickListener() {
         binding.apply {
+            root.setOnTouchListener { _, _ -> true }
             toolbar.setNavigationOnClickListener {
                 closeEvent()
             }
