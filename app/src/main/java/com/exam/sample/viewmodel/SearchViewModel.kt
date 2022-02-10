@@ -43,7 +43,9 @@ class SearchViewModel @Inject constructor (
 
     private var job: Job? = null
     private var dataFlow: Flow<PagingData<TrendingDetail>> = flow { }
-    var dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
+    val _dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
+    val dataListLiveData: LiveData<PagingData<TrendingDetail>>
+        get() = _dataListLiveData
 
     @WorkerThread
     fun getSearchData(keyword: String) {
@@ -53,7 +55,7 @@ class SearchViewModel @Inject constructor (
         job = viewModelScope.launch {
             dataFlow = searchPagingRepository.getPagingData(keyword)
             dataFlow.cachedIn(viewModelScope).collectLatest {
-                dataListLiveData.value = it
+                _dataListLiveData.value = it
             }
         }
     }
