@@ -32,7 +32,10 @@ class ArtistsViewModel @Inject constructor(
 {
     private var job: Job? = null
     private var dataFlow: Flow<PagingData<TrendingDetail>> = flow { }
-    var dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
+    val _dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
+    val dataListLiveData: LiveData<PagingData<TrendingDetail>>
+        get() = _dataListLiveData
+
 
     @WorkerThread
     fun getArtistsData(keyword: String) {
@@ -42,7 +45,7 @@ class ArtistsViewModel @Inject constructor(
         job = viewModelScope.launch {
             dataFlow = artistPagingRepository.getPagingData(keyword)
             dataFlow.cachedIn(viewModelScope).collectLatest {
-                dataListLiveData.value = it
+                _dataListLiveData.value = it
             }
         }
     }

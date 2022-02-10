@@ -57,7 +57,6 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
 
     lateinit var requestActivity: ActivityResultLauncher<Intent>
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -122,7 +121,6 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
             dbEvent.observe(
                 requireActivity(),
                 EventObserver {
-
                     when (it.status) {
                         Status.SUCCESS -> {
                             if (it.data?.flag == DBState.DB_DELETE) {
@@ -132,12 +130,14 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
                                 val list = it.data?.data as List<FavoriteInfo>
                                 if (list.isNotEmpty())
                                     viewModel.getFavoriteInfoRequest(list)
-                                else
+                                else {
+                                    adapterRecycler.clearItem()
                                     snackBarSimpleAlert(
                                         R.string.noFavorites,
                                         R.string.ok,
                                         binding.toolbar
                                     )
+                                }
                             }
                         }
 
@@ -170,10 +170,9 @@ class FavoriteFragment constructor(private val closeEvent: () -> Unit) : BaseFra
     }
 
     private fun initData() {
-        viewModel.apply {
-            getFavoriteAll()
-        }
+        viewModel.getFavoriteAll()
     }
+
     private fun onClickListener() {
         binding.apply {
             root.setOnTouchListener { _, _ -> true }

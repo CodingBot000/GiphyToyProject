@@ -32,7 +32,9 @@ class ClipsViewModel @Inject constructor(
 {
     private var job: Job? = null
     private var dataFlow: Flow<PagingData<TrendingDetail>> = flow { }
-    var dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
+    val _dataListLiveData: MutableLiveData<PagingData<TrendingDetail>> = MutableLiveData()
+    val dataListLiveData: LiveData<PagingData<TrendingDetail>>
+        get() = _dataListLiveData
 
     @WorkerThread
     fun getClipsData(keyword: String) {
@@ -42,7 +44,7 @@ class ClipsViewModel @Inject constructor(
         job = viewModelScope.launch {
             dataFlow = clipsPagingRepository.getPagingData(keyword)
             dataFlow.cachedIn(viewModelScope).collectLatest {
-                dataListLiveData.value = it
+                _dataListLiveData.value = it
             }
         }
     }
