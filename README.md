@@ -10,7 +10,7 @@ Used by Giphy API
 
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
-- Click to view as a 'YouTube' video.
+- Click to view as a 'YouTube' video.  <img src="https://github.com/CodingBot000/apks/blob/main/musk_smile.jpg"><img src="https://github.com/CodingBot000/apks/blob/main/musk_normal.jpg">
 
 ## Download APK for install
 Go to the [Releases](https://github.com/CodingBot000/apks/blob/main/giphyToyProject.apk) to download the latest APK.
