@@ -39,5 +39,5 @@ LoadMore가  필요없는  부분은 RxJava 입니다.
 ****************************************
 
 [Project Structure]
-![Alt text](https://github.com/CodingBot000/GiphyToyProject/blob/main/GiphyTestApp.drawio.png)
+![Alt text](https://github.com/CodingBot000/apks/blob/main/GiphyTestApp.drawio.png)
 
