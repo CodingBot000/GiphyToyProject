@@ -12,7 +12,7 @@ Used by Giphy API
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
 - Click to view as a 'YouTube' video.
 
-## Download
+## Download APK for install
 Go to the [Releases](https://github.com/CodingBot000/apks/blob/main/giphyToyProject.apk) to download the latest APK.
 
 
