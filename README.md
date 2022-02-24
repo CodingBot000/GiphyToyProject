@@ -14,13 +14,9 @@ Used by Giphy API
 
 ## Download
 Go to the [Releases]( ) to download the latest APK.
-<!-- Go to the [Releases](https://github.com/skydoves/Pokedex/releases) to download the latest APK. -->
-
-<!-- <img src="/previews/preview.gif" align="right" width="32%"/> -->
 
 
 ## Tech stack
-- Minimum SDK level 21
 - [Kotlin] based, [Coroutines] + [Flow], [RxJava] for asynchronous.
 - [Hilt] for dependency injection.
 - Jetpack
