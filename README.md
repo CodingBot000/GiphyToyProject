@@ -1,77 +1,47 @@
-# GiphyToyProject
+<h1 align="center">GiphyTestProject</h1>
 
-
-
-
-Giphy Api를 활용한 Test Toy Project
-
-Coding style 및 구조 잡는 것 정도만 확인할수 있는 수준정도의 가벼운 프로젝트입니다.
-
+<p align="center">  
+ This ToyProject make modern Android development with Dagger-Hilt, Coroutines, Flow, RxJava, Jetpack (Room, ViewModel), based on MVVM architecture.
+</br>
+</br>
+Used by Giphy API
+</p>
+</br>
 
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
+- Click to view as a 'YouTube' video.
 
-이미지를 누르시면 앱 동작 영상을 유튜브를 통해 확인가능하십니다
+## Download
+Go to the [Releases]( ) to download the latest APK.
+<!-- Go to the [Releases](https://github.com/skydoves/Pokedex/releases) to download the latest APK. -->
+
+<!-- <img src="/previews/preview.gif" align="right" width="32%"/> -->
 
 
+## Tech stack
+- Minimum SDK level 21
+- [Kotlin] based, [Coroutines] + [Flow], [RxJava] for asynchronous.
+- [Hilt] for dependency injection.
+- Jetpack
+  - Lifecycle 
+  - ViewModel 
+  - DataBinding 
+  - Room Persistence 
+  - Paging3
+- Architecture
+  - MVVM Architecture (View - DataBinding - ViewModel - Model)
+  - Repository Pattern
+- [Retrofit2 & OkHttp3]
+- [Glide]
 
 
 ****************************************
-* 일부러 Coroutine과 RxJava를 같이썼습니다.
+* 보여주기용으로 일부러 Coroutine과 RxJava를 같이썼습니다.
 LoadMore가  필요한 부분은 Coroutine + Paging 처리
 LoadMore가  필요없는  부분은 RxJava 입니다.
 ****************************************
 
-
-
-- Library :
-MVVM, DataBinding
-Retrofit, RxJava, Paging3
-Coroutine,
-LiveData, 
-Room DataBase
-
-- Extends :
-abstract class BaseActivity,
-abstract class BaseFragment,
-abstract class BaseViewModel,
-abstract class SingleUseCase
-
-- Domain Layer : 
-* API
-UseCaseGet*
-
-* LocalDB
-UseCaseDb*
-
-- Model Layer :
-Repository,
-DataSource
-
-- DI :
-Dagger Hilt
-
-[Add description]
-* DI :
-DaggerHilt
-
-* UseCase :
-UseCase로 분리해서 관림사를 더 세분화. 코드 중복 감소
-SingUseCase를 이용하여 한번에 하나씩만 실행 -> disposable처리 적용
-
-* 검색어처리
-검색시 입력문자 변경에 따라 검색버튼 클리없이 실시간 체크해서 검색실행 (RxJava사용)
-
-* CompositeDisposable
-모든 RxJava 네트워크, DB 접근 이벤트를 UseCase 로 옮겼기때문에 기존 ViewModel에는 더이상  compositeDisposable이 없음.
-SigleUseCase를 통해 제거 후 사용으로 바로바로 제거가 되어 메모리누수 리스크를 최소화 시킴.
-
-
-StaggerdGridLayout
-읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
-API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이즈를 고정하여 안정적 로딩하도록 하였습니다.
-
-
-[전체 구조도 요약]
+[Project Structure]
 ![Alt text](https://github.com/CodingBot000/GiphyToyProject/blob/main/GiphyTestApp.drawio.png)
 
