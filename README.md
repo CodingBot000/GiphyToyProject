@@ -13,7 +13,7 @@ Used by Giphy API
 - Click to view as a 'YouTube' video.
 
 ## Download
-Go to the [Releases]( ) to download the latest APK.
+Go to the [Releases](https://github.com/CodingBot000/apks/blob/main/giphyToyProject.apk) to download the latest APK.
 
 
 ## Tech stack
