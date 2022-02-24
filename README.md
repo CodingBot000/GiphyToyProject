@@ -38,6 +38,6 @@ LoadMore가  필요한 부분은 Coroutine + Paging 처리
 LoadMore가  필요없는  부분은 RxJava 입니다.
 ****************************************
 
-[Project Structure]
+## Project Structure
 ![Alt text](https://github.com/CodingBot000/apks/blob/main/GiphyTestApp.drawio.png)
 
