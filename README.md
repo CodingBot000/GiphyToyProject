@@ -10,8 +10,9 @@ Used by Giphy API
 
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
-<img src="https://github.com/CodingBot000/apks/blob/main/musk_smile.jpg" width="100px">
 <img src="https://github.com/CodingBot000/apks/blob/main/musk_normal.jpg" width="100px">
+<img src="https://github.com/CodingBot000/apks/blob/main/musk_smile.jpg" width="100px">
+
 - Click to view as a 'YouTube' video.  
 
 ## Download APK for install
