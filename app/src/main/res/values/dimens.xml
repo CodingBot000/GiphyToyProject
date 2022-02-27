@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <dimen name="margin_padding_10dp">10dp</dimen>
     <dimen name="grid_item_corner_radius">8dp</dimen>
-
-
     //treding
     <dimen name="top_item_trending_height">70dp</dimen>
-
     //detail
     <dimen name="checkbox_favorite_size">40dp</dimen>
     <dimen name="middle_icon_size">30dp</dimen>
 
-    //favorite
-
-    //search
-
-
-    //duration
 </resources>

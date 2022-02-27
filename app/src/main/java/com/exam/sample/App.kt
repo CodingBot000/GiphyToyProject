@@ -7,7 +7,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.exam.sample.common.ApplicationLifeCycleListener
 import com.exam.sample.utils.Const
-import com.facebook.stetho.Stetho
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -27,7 +26,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Stetho.initializeWithDefaults(this)
         sApplication = this
 
         ProcessLifecycleOwner.get().lifecycle
