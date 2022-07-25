@@ -23,7 +23,7 @@ Used by Giphy API
 <img src="https://github.com/CodingBot000/apks/blob/main/musk8.jpg" width="100px">
  </div>
 </br>
-
+    
 ## Download APK for install
 Go to the [apk file](https://github.com/CodingBot000/apks/blob/main/giphyToyProject.apk) to download the latest APK.
 
