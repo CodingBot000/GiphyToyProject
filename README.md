@@ -11,18 +11,7 @@ Used by Giphy API
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZPj4myoBoHw/0.jpg)](https://youtu.be/ZPj4myoBoHw)
 - Click to view as a 'YouTube' video.  
-</br>
-<div>
-<img src="https://github.com/CodingBot000/apks/blob/main/musk1.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk2.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk3.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk4.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk5.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk6.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk7.jpg" width="100px">
-<img src="https://github.com/CodingBot000/apks/blob/main/musk8.jpg" width="100px">
- </div>
-</br>
+
     
 ## Download APK for install
 Go to the [apk file](https://github.com/CodingBot000/apks/blob/main/giphyToyProject.apk) to download the latest APK.
